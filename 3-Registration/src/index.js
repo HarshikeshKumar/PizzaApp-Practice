@@ -3,6 +3,7 @@ import { PORT } from "./config/serverConfig.js";
 import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import connectDB from "./config/dbConfig.js";
+import authRouter from "./routes/authRoute.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userRouter);
 app.use("/carts", cartRouter);
+app.use("/auth", authRouter);
 
 app.get("/ping", (req, res) => {
   return res.json({
