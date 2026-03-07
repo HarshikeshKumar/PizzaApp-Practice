@@ -5,6 +5,7 @@ import cartRouter from "./routes/cartRoute.js";
 import connectDB from "./config/dbConfig.js";
 import authRouter from "./routes/authRoute.js";
 import cookieParser from "cookie-parser";
+import isLoggedIn from "./validation/authValidator.js";
 
 const app = express();
 
@@ -19,7 +20,8 @@ app.use("/users", userRouter);
 app.use("/carts", cartRouter);
 app.use("/auth", authRouter);
 
-app.get("/ping", (req, res) => {
+// Iss API ko koi tb hi access krr skta hai jb wo Logged in ho
+app.get("/ping", isLoggedIn, (req, res) => {
   console.log(req.body);
   // Cookie ko access krr raha hu check krne ke liye access ho raha hai ya nhi
   console.log(req.cookies);
