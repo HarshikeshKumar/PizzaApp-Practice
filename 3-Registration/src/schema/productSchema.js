@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema(
 
     category: {
       type: String,
-      enum: ["veg, non-veg, drinks, sides"], // In 4 variable me se hi koi ek daal paoge
+      enum: ["veg", "non-veg", "drinks", "sides"], // In 4 variable me se hi koi ek daal paoge
       default: "veg",
     },
 
