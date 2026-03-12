@@ -6,6 +6,7 @@ import connectDB from "./config/dbConfig.js";
 import authRouter from "./routes/authRoute.js";
 import cookieParser from "cookie-parser";
 import isLoggedIn from "./validation/authValidator.js";
+import uploader from "./middlewares/multerMiddleware.js";
 
 const app = express();
 
@@ -27,6 +28,13 @@ app.get("/ping", isLoggedIn, (req, res) => {
   console.log(req.cookies);
   return res.json({
     message: "Pong",
+  });
+});
+
+app.post("/photo", uploader.single("incomingFile"), (req, res) => {
+  //incomingFile--> PostMan se file bhejte time ker k naam 'incomingFile' hi hai
+  return res.json({
+    message: "Ok",
   });
 });
 
