@@ -7,6 +7,8 @@ import authRouter from "./routes/authRoute.js";
 import cookieParser from "cookie-parser";
 import isLoggedIn from "./validation/authValidator.js";
 import uploader from "./middlewares/multerMiddleware.js";
+import cloudinary from "./config/cloudinaryConfig.js";
+import fs from "fs/promises";
 
 const app = express();
 
@@ -31,8 +33,15 @@ app.get("/ping", isLoggedIn, (req, res) => {
   });
 });
 
-app.post("/photo", uploader.single("incomingFile"), (req, res) => {
+app.post("/photo", uploader.single("incomingFile"), async (req, res) => {
   //incomingFile--> PostMan se file bhejte time ker k naam 'incomingFile' hi hai
+  console.log(req.file);
+
+  // Abb uploads/ ke under uploaded file ko Cloudinay pe store krna chahta hu
+  const result = await cloudinary.uploader.upload(req.file.path);
+  console.log("Result from cloudinary: ", result);
+  // Delete file from server
+  await fs.unlink(req.file.path);
   return res.json({
     message: "Ok",
   });
