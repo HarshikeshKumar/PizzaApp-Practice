@@ -24,7 +24,7 @@ async function getProductById(productId) {
 async function deleteProductById(productId) {
   try {
     const response = await Product.findByIdAndDelete(productId);
-    return true;
+    return response;
   } catch (error) {
     console.log(error);
   }

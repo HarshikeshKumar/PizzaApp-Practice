@@ -10,7 +10,7 @@ async function createProductController(req, res) {
     const product = await createProductService({
       productName: req.body.productName,
       description: req.body.description,
-      imagePath: req.file.path,
+      imagePath: req.file?.path,
       price: req.body.price,
       category: req.body.category, // If category is undefined, veg will be stored
       inStock: req.body.inStock, // If inStock is undefined then true will be stored
