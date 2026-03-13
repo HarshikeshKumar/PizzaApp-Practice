@@ -9,6 +9,7 @@ import isLoggedIn from "./validation/authValidator.js";
 import uploader from "./middlewares/multerMiddleware.js";
 import cloudinary from "./config/cloudinaryConfig.js";
 import fs from "fs/promises";
+import productRouter from "./routes/productRoute.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use("/users", userRouter);
 app.use("/carts", cartRouter);
 app.use("/auth", authRouter);
+app.use("/products", productRouter);
 
 // Iss API ko koi tb hi access krr skta hai jb wo Logged in ho
 app.get("/ping", isLoggedIn, (req, res) => {
