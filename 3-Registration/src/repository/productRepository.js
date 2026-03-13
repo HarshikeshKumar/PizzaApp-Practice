@@ -1,5 +1,4 @@
 import Product from "../schema/productSchema.js";
-import InternalServerError from "../utils/internalServerError.js";
 
 // Create Product................................
 async function createProductRepo(productDetils) {
@@ -7,7 +6,7 @@ async function createProductRepo(productDetils) {
     const response = await Product.create({ ...productDetils });
     return response;
   } catch (error) {
-    console.log(error.name); // Har error ke sath name property hota hai
+    console.log(error);
   }
 }
 

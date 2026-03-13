@@ -1,5 +1,10 @@
-import { createProductService } from "../services/productService.js";
+import {
+  createProductService,
+  deleteProductByIdService,
+  getProductByIdService,
+} from "../services/productService.js";
 
+// Create Product Controller.....................
 async function createProductController(req, res) {
   try {
     const product = await createProductService({
@@ -27,4 +32,50 @@ async function createProductController(req, res) {
   }
 }
 
-export { createProductController };
+// Get product By Id Controller..................
+async function getProductByIdController(req, res) {
+  try {
+    const response = await getProductByIdService(req.params.id);
+    return res.status(200).json({
+      success: true,
+      message: "Successfully Fetched the Product",
+      error: {},
+      data: response,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(error.statusCode).json({
+      success: false,
+      message: error.reason,
+      data: {},
+      error: error,
+    });
+  }
+}
+
+// Delete Product By Id controller............
+async function deleteProductByIdController(req, res) {
+  try {
+    const response = await deleteProductByIdService(req.params.id);
+    return res.status(200).json({
+      success: true,
+      message: "Successfully deleted the Product",
+      error: {},
+      data: response,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(error.statusCode).json({
+      success: false,
+      message: error.reason,
+      data: {},
+      error: error,
+    });
+  }
+}
+
+export {
+  createProductController,
+  getProductByIdController,
+  deleteProductByIdController,
+};
