@@ -1,4 +1,5 @@
 import { createUserRepo, findUserRepo } from "../repository/userRepository.js";
+import { createCartRepo } from "../repository/cartRepository.js";
 
 async function createUserService(userDetails) {
   // 1. We need to check user is already exists or not..
@@ -29,6 +30,10 @@ async function createUserService(userDetails) {
       statusCode: 500,
     };
   }
+
+  // Create Cart...................
+  await createCartRepo(newUser._id);
+
   // 5. If user Created then return new user....
   return newUser;
 }
