@@ -42,6 +42,12 @@ const userSchema = new mongoose.Schema(
       minlength: [10, "Phone number should be 10 characters long"],
       maxlength: [10, "Phone number should be 10 characters"],
     },
+
+    role: {
+      type: String,
+      enum: ["User", "Admin"],
+      default: "User",
+    },
   },
   { timestamps: true },
 );

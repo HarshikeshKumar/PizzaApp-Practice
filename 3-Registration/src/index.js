@@ -5,7 +5,7 @@ import cartRouter from "./routes/cartRoute.js";
 import connectDB from "./config/dbConfig.js";
 import authRouter from "./routes/authRoute.js";
 import cookieParser from "cookie-parser";
-import isLoggedIn from "./validation/authValidator.js";
+import { isLoggedIn } from "./validation/authValidator.js";
 import uploader from "./middlewares/multerMiddleware.js";
 import cloudinary from "./config/cloudinaryConfig.js";
 import fs from "fs/promises";
