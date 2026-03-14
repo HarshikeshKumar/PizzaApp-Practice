@@ -1,6 +1,7 @@
 import Cart from "../schema/cartSchema.js";
 import BadRequestError from "../utils/badRequestError.js";
 import InternalServerError from "../utils/internalServerError.js";
+import NotFoundError from "../utils/notFoundError.js";
 
 // Create Cart By user.................
 async function createCartRepo(userId) {
@@ -32,4 +33,19 @@ async function getCartByUserIdRepo(userId) {
   }
 }
 
-export { createCartRepo, getCartByUserIdRepo };
+// Clear Cart...................
+async function clraeCart(userId) {
+  try {
+    const cart = await Cart.findOne({ user: userId });
+    if (!cart) {
+      throw new NotFoundError("Cart");
+    }
+    cart.items = [];
+    await cart.save();
+    return cart;
+  } catch (error) {
+    throw new InternalServerError();
+  }
+}
+
+export { createCartRepo, getCartByUserIdRepo, clraeCart };
