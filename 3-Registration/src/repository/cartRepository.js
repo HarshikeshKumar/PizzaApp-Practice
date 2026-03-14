@@ -22,14 +22,14 @@ async function createCartRepo(userId) {
 }
 
 // Get Cart By User Id....................
-// async function getCartByUserIdRepo(userId) {
-//   try {
-//     const cart = await Cart.findOne({ user: userId });
-//     return cart;
-//   } catch (error) {
-//     console.log(error);
-//     throw new InternalServerError();
-//   }
-// }
+async function getCartByUserIdRepo(userId) {
+  try {
+    const cart = await Cart.findOne({ user: userId }).populate("items.product"); // populate krne se Pura ka pura product fetch hoke aayega items ke under
+    return cart;
+  } catch (error) {
+    console.log(error);
+    throw new InternalServerError();
+  }
+}
 
-// export { createCartRepo, getCartByUserIdRepo };
+export { createCartRepo, getCartByUserIdRepo };
